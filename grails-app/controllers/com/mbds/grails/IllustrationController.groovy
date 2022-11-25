@@ -4,7 +4,7 @@ import grails.plugin.springsecurity.annotation.Secured
 import grails.validation.ValidationException
 import static org.springframework.http.HttpStatus.*
 
-@Secured('ROLE_ADMIN')
+@Secured(['ROLE_ADMIN','ROLE_USER'])
 class IllustrationController {
 
     IllustrationService illustrationService
@@ -12,7 +12,7 @@ class IllustrationController {
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
+        params.max = Math.min(max ?: 14, 100)
         respond illustrationService.list(params), model:[illustrationCount: illustrationService.count()]
     }
 

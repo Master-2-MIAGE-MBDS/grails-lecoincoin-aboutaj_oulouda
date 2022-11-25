@@ -24,6 +24,10 @@ class UserController {
         respond new User(params)
     }
 
+    def createAdmin() {
+        respond new User(params)
+    }
+
     def save(User user) {
         if (user == null) {
             notFound()
