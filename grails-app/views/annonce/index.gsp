@@ -4,6 +4,7 @@
     <meta name="layout" content="main"/>
     <g:set var="entityName" value="${message(code: 'annonce.label', default: 'Annonce')}"/>
     <title><g:message code="default.list.label" args="[entityName]"/></title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
     body {
         font-family: Arial, Helvetica, sans-serif;
@@ -32,6 +33,20 @@
         background-color: white;
         color: black;
         border: 2px solid #e7e7e7;
+    }
+
+    .btn {
+        background-color: #87888a;
+        border: none;
+        color: white;
+        padding: 12px 16px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    /* Darker background on mouse-over */
+    .btn:hover {
+        background-color: #020202;
     }
     </style>
 </head>
@@ -65,15 +80,31 @@
                     <td>${annonce.title}</td>
                     <td>${annonce.description}</td>
                     <td>${annonce.active}</td>
-                    <td>${annonce.price}</td>
+                    <td >${annonce.price}</td>
                     <td>${annonce.author.username}</td>
-                    <td>
-
+                    <td >
                         <g:each in="${annonce.illustrations}" var="image">
-                            <img src="${createLinkTo(dir: 'images', file: image.filename)}" alt="Grails" onclick="illustration(${image.id})" />
+                            <img src="${createLinkTo(dir: 'images', file: image.filename)}" alt="Grails"
+                                 onclick="illustration(${image.id})"/>
                         </g:each>
                     </td>
 
+                    <td>
+                        <g:link class="show" action="show" controller="annonce" id="${annonce.id}">
+                            <button class="btn"><i class="fa fa-eye"></i></button>
+                        </g:link>
+
+                        <g:link class="edit" action="edit" controller="annonce" id="${annonce.id}">
+                            <button class="btn"><i class="fa fa-edit"></i></button>
+                        </g:link>
+                        <g:link class="delete" action="delete" controller="annonce" id="${annonce.id}">
+                            <button class="btn"
+                                    value="${message(code: 'default.button.delete.label', default: 'Delete')}"
+                                    onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');"><i
+                                    class="fa fa-trash"></i></button>
+                        </g:link>
+
+                    </td>
 
                 </tr>
             </g:each>
@@ -88,12 +119,14 @@
     </div>
 </div>
 <script type="text/javascript">
-    function illustration(id){
+    function illustration(id) {
         $.ajax({
-            url:'${g.createLink( controller:'illustration', action:'show')}',
-            param:id,
+            url: '${g.createLink( controller:'illustration', action:'show')}',
+            param: id,
             type: 'get'
-        }).success( function ( data ) { $( '#offerList' ).html( data ); });
+        }).success(function (data) {
+            $('#offerList').html(data);
+        });
     }
 </script>
 </body>

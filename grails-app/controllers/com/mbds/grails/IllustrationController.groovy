@@ -21,6 +21,22 @@ class IllustrationController {
     }
 
     def create() {
+
+        def file= request.getPart('imageUpload')
+        String imageUploadPath=grailsApplication.config.imageUpload.path
+        try{
+            if(file && !file.empty){
+                file.transferTo(new File("${imageUploadPath}/${file.name}"))
+                flash.message="your.sucessful.file.upload.message"
+            }
+            else{
+                flash.message="your.unsucessful.file.upload.message"
+            }
+        }
+        catch(Exception e){
+            log.error("Your exception message goes here",e)
+        }
+
         respond new Illustration(params)
     }
 

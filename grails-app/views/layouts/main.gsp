@@ -24,7 +24,7 @@
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" href="#">Lecoincoin</a>
+            <asset:image src="logo5.png" absolute=""></asset:image>
         </div>
         <ul class="nav navbar-nav">
             <sec:ifLoggedIn>

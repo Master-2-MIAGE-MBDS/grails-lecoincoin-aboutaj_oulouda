@@ -39,3 +39,6 @@ grails.plugin.springsecurity.filterChain.chainMap = [
 	]
 ]
 
+imageUpload.path='C:\\Users\\DELL XPS\\Desktop\\mbds-grails-22-23-main\\mbds-grails-22-23-main\\grails-app\\assets\\images'
+grailsApplication.config.imageUpload.path
+
