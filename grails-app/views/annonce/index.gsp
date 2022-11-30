@@ -5,9 +5,11 @@
     <g:set var="entityName" value="${message(code: 'annonce.label', default: 'Annonce')}"/>
     <title><g:message code="default.list.label" args="[entityName]"/></title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <style>
     body {
         font-family: Arial, Helvetica, sans-serif;
+        background:#eee;
     }
 
     .container {
@@ -35,19 +37,7 @@
         border: 2px solid #e7e7e7;
     }
 
-    .btn {
-        background-color: #87888a;
-        border: none;
-        color: white;
-        padding: 12px 16px;
-        font-size: 16px;
-        cursor: pointer;
-    }
 
-    /* Darker background on mouse-over */
-    .btn:hover {
-        background-color: #020202;
-    }
     </style>
 </head>
 
@@ -72,37 +62,43 @@
                     <th scope="col">Price</th>
                     <th scope="col">Author</th>
                     <th scope="col">Illustrations</th>
+                    <th scope="col">Operations</th>
                 </tr>
             </thread>
             <tbody>
             <g:each in="${annonceList}" var="annonce">
                 <tr>
-                    <td>${annonce.title}</td>
+                    <td style="vertical-align: middle">${annonce.title}</td>
                     <td>${annonce.description}</td>
-                    <td>${annonce.active}</td>
-                    <td >${annonce.price}</td>
-                    <td>${annonce.author.username}</td>
-                    <td >
+                    <td style="vertical-align: middle">${annonce.active}</td>
+                    <td style="vertical-align: middle">${annonce.price}</td>
+                    <td style="vertical-align: middle">${annonce.author.username}</td>
+                    <td>
                         <g:each in="${annonce.illustrations}" var="image">
                             <img src="${createLinkTo(dir: 'images', file: image.filename)}" alt="Grails"
                                  onclick="illustration(${image.id})"/>
                         </g:each>
                     </td>
 
-                    <td>
-                        <g:link class="show" action="show" controller="annonce" id="${annonce.id}">
-                            <button class="btn"><i class="fa fa-eye"></i></button>
-                        </g:link>
+                    <td style="width: 200px;vertical-align: middle">
+                        <div>
 
-                        <g:link class="edit" action="edit" controller="annonce" id="${annonce.id}">
-                            <button class="btn"><i class="fa fa-edit"></i></button>
-                        </g:link>
-                        <g:link class="delete" action="delete" controller="annonce" id="${annonce.id}">
-                            <button class="btn"
-                                    value="${message(code: 'default.button.delete.label', default: 'Delete')}"
-                                    onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');"><i
-                                    class="fa fa-trash"></i></button>
-                        </g:link>
+
+                            <g:link  action="show" controller="annonce" id="${annonce.id}">
+                                <button class="btn btn-primary"><i class="fa fa-eye"></i></button>
+                            </g:link>
+
+                            <g:link class="edit" action="edit" controller="annonce" id="${annonce.id}">
+                                <button class="btn btn-info"><i class="fa fa-edit"></i></button>
+                            </g:link>
+
+                            <g:link class="delete" action="delete" controller="annonce" id="${annonce.id}">
+                                <button class="btn btn-danger"
+                                        value="${message(code: 'default.button.delete.label', default: 'Delete')}"
+                                        onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');"><i
+                                        class="fa fa-trash"></i></button>
+                            </g:link>
+                        </div>
 
                     </td>
 
