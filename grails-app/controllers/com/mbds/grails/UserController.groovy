@@ -9,11 +9,12 @@ class UserController {
 
     UserService userService
 
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    static allowedMethods = [save: "POST"]
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        respond userService.list(params), model:[userCount: userService.count()]
+        def users =User.findAll();
+        respond userService.list(params), model:[userCount: userService.count(),users:users]
     }
 
     def show(Long id) {
@@ -21,11 +22,9 @@ class UserController {
     }
 
     def create() {
-        respond new User(params)
-    }
-
-    def createAdmin() {
-        respond new User(params)
+        def rolelist=Role.list()
+        println rolelist
+        respond new User(params),model:[roles:rolelist]
     }
 
     def save(User user) {
@@ -35,7 +34,9 @@ class UserController {
         }
 
         try {
+            def role =Role.get(params.role)
             userService.save(user)
+            UserRole.create(user,role,true)
         } catch (ValidationException e) {
             respond user.errors, view:'create'
             return
@@ -82,6 +83,10 @@ class UserController {
             return
         }
 
+        User user = User.findById(id);
+
+        Collection<UserRole> userRoles = UserRole.findAllByUser(user);
+        userRoles*.delete();
         userService.delete(id)
 
         request.withFormat {

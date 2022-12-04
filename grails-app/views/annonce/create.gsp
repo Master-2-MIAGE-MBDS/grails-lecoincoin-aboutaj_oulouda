@@ -68,21 +68,21 @@
                         <div class="col-sm-6 mb-3">
                             <div class="form-group">
                                 <label class="required-field" for="title">Title</label>
-                                <input type="text" class="form-control" id="title" name="title" placeholder="Wendy" value>
+                                <input type="text" class="form-control" id="title" name="title" placeholder="Annonce Name" value>
                             </div>
                         </div>
 
                         <div class="col-sm-6 mb-3">
                             <div class="form-group">
                                 <label class="required-field" for="price">Price</label>
-                                <input class="form-control" type="number decimal" name="price" value="" required="" step="0.01" min="0.0" id="price">
+                                <input class="form-control" type="number decimal" name="price" value required="" step="0.01" min="0.0" id="price">
                             </div>
                         </div>
 
                         <div class="col-sm-6 mb-3">
                             <div class="form-group">
                                 <label for="active">Activated</label>
-                                <input type="checkbox" name="active" id="active">
+                                <input type="checkbox" name="active" id="active" value="${true}">
                             </div>
                         </div>
 
@@ -95,16 +95,7 @@
                             </div>
                         </div>
 
-                        <label for="author">Author
-                            <span class="required-indicator">*</span>
-                        </label><select name="author.id" required="" id="author">
-                        <option value="1">User(username:admin)</option>
-                        <option value="2">User(username:Alice)</option>
-                        <option value="3">User(username:Bob)</option>
-                        <option value="4">User(username:Charly)</option>
-                        <option value="5">User(username:Denis)</option>
-                        <option value="6">User(username:Etienne)</option>
-                    </select>
+
 
                         <div class="col-sm-12 mb-3">
                             <button  class="btn btn-primary" type="submit" name="create" class="save" value="Create" id="create">Submit</button>

@@ -24,7 +24,7 @@
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
         <div class="navbar-header">
-            <asset:image src="logo5.png" absolute=""></asset:image>
+            <asset:image src="f2.png" style="width:40px;" absolute=""></asset:image>
         </div>
         <ul class="nav navbar-nav">
             <sec:ifLoggedIn>

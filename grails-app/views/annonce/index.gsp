@@ -37,6 +37,17 @@
         border: 2px solid #e7e7e7;
     }
 
+    .pagination {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+    }
+
+    .pagination li {
+        margin: 0 1px;
+    }
+
 
     </style>
 </head>
@@ -82,8 +93,6 @@
 
                     <td style="width: 200px;vertical-align: middle">
                         <div>
-
-
                             <g:link  action="show" controller="annonce" id="${annonce.id}">
                                 <button class="btn btn-primary"><i class="fa fa-eye"></i></button>
                             </g:link>
@@ -109,8 +118,8 @@
         </table>
 
 
-        <div class="pagination">
-            <g:paginate total="${annonceCount ?: 0}"/>
+        <div >
+            <g:paginate  total="${annonceCount ?: 0}"/>
         </div>
     </div>
 </div>

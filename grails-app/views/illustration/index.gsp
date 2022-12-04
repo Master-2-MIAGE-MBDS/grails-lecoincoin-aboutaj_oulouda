@@ -6,7 +6,6 @@
     <title><g:message code="default.list.label" args="[entityName]"/></title>
     <style>
     body {
-        margin-top: 20px;
         background: #eee;
     }
 
@@ -70,6 +69,25 @@
         background-color: #228bdf;
         margin: 10px auto;
     }
+
+    .button {
+        background-color: #4CAF50; /* Green */
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+    }
+
+    .button4 {
+        background-color: white;
+        color: black;
+        border: 2px solid #e7e7e7;
+    }
     </style>
 
 </head>
@@ -77,45 +95,30 @@
 
 <body>
 <div class="container">
-    <div>
-        <a href="#list-illustration" class="skip" tabindex="-1"><g:message code="default.link.skip.label"
-                                                                           default="Skip to content&hellip;"/></a>
-    </div>
-
-    <div class="nav" role="navigation">
-        <ul>
-            <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-            <li><g:link class="create" action="create"><g:message code="default.new.label"
-                                                                  args="[entityName]"/></g:link></li>
-        </ul>
-    </div>
-
-    <div id="list-illustration" class="content scaffold-list" role="main">
-        <h1><g:message code="default.list.label" args="[entityName]"/></h1>
-        <g:if test="${flash.message}">
-            <div class="message" role="status">${flash.message}</div>
-        </g:if>
+    <button class="button button4"><g:link class="create" action="create"><g:message code="default.new.label"
+                                                                                     args="[entityName]"/></g:link></button>
     %{--}  <f:table collection="${illustrationList}" />--}%
 
-        <div class="portfolioContainer">
-            <g:each in="${illustrationList}" var="illustration">
-                <div class="col-sm-6 col-lg-3 col-md-4 webdesign illustrator">
-                    <div class="gal-detail thumb">
-                        <a href="/illustration/show/${illustration.id}" class="image-popup" title="Screenshot-1">
-                            <img src="${createLinkTo(dir: 'images', file: illustration.filename)}"class="thumb-img"
-                                 alt="work-thumbnail">
-                        </a>
-                        <h4 class="text-center">${illustration.annonce.author.username}</h4>
+    <div class="portfolioContainer">
+        <g:each in="${illustrationList}" var="illustration">
+            <div class="col-sm-6 col-lg-3 col-md-4 webdesign illustrator">
+                <div class="gal-detail thumb">
+                    <a href="/illustration/show/${illustration.id}" class="image-popup" title="Screenshot-1">
+                        <img src="${createLinkTo(dir: 'images', file: illustration.filename)}" class="thumb-img"
+                             alt="work-thumbnail">
+                    </a>
+                    <h4 class="text-center">${illustration.annonce.author.username}</h4>
 
-                    </div>
                 </div>
-            </g:each>
-        </div>
+            </div>
+        </g:each>
+    </div>
 
+    <div class="row">
         <div class="pagination">
             <g:paginate total="${illustrationCount ?: 0}"/>
         </div>
-    </div>
+    </div></div>
 </div>
 </body>
 </html>

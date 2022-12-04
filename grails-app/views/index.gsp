@@ -80,7 +80,7 @@
 
                 <div class="col-lg-6 mt-5 mt-lg-0">
                     <figure class="potoaboutwrap">
-                        <img src="https://via.placeholder.com/400x700/FF7F50/000000" alt="potoabout"/>
+                        <asset:image src="LECOINCOIN.png" absolute=""></asset:image>
                     </figure>
                 </div>
             </div>

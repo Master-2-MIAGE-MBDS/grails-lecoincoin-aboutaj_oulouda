@@ -27,9 +27,8 @@
             </g:hasErrors>
 
 
-                    <g:uploadForm  controller="illustration" action="create">
+                    <g:uploadForm  controller="illustration" action="create" enctype="multipart/form-data">
                         <input type="file" name="imageUpload">
-                        <input type="submit" value="Upload Image">
                     </g:uploadForm>
 
 

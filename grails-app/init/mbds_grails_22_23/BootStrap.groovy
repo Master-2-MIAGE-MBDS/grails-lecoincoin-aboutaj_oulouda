@@ -15,6 +15,7 @@ class BootStrap {
 
         // Role user
         def UtilisateurRole = new Role(authority: "ROLE_USER").save()
+        def ClientRole = new Role(authority: "ROLE_CLIENT").save()
 
         // On boucle sur une liste de 5 prénoms
         ["Alice", "Bob", "Charly", "Denis", "Etienne"].each {
@@ -26,10 +27,14 @@ class BootStrap {
                     Integer index ->
                         // Pour ajouter 5 annonces par utilisateur
                         def annonceInstance = new Annonce(title: username + " " + index, description: "Description de l'annonce", price: 10 * index, active: Boolean.TRUE)
-                        (1..5).each {
+
                             // Et enfin 5 illustrations par annonce
                             annonceInstance.addToIllustrations(new Illustration(filename: "grails.svg"))
-                        }
+                            annonceInstance.addToIllustrations(new Illustration(filename: "grails1.svg"))
+                            annonceInstance.addToIllustrations(new Illustration(filename: "grails2.svg"))
+                            annonceInstance.addToIllustrations(new Illustration(filename: "grails3.svg"))
+                            annonceInstance.addToIllustrations(new Illustration(filename: "grails4.svg"))
+
                         // On associe l'annonce créée à l'utilisateur
                         userInstance.addToAnnonces(annonceInstance)
                         // Et on sauvegarde l'utilisateur qui va sauvegarder ses annonces qui sauvegarderont leurs illustrations

@@ -5,13 +5,12 @@ import grails.plugin.springsecurity.annotation.Secured
 import grails.validation.ValidationException
 import static org.springframework.http.HttpStatus.*
 
-@Secured(['ROLE_ADMIN','ROLE_USER'])
+@Secured('ROLE_USER')
 class AnnonceController {
 
     AnnonceService annonceService
     SpringSecurityService springSecurityService
 
-    static allowedMethods = [save: "POST", update: "PUT"]
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
@@ -35,6 +34,15 @@ class AnnonceController {
         }
 
         try {
+            def currenLoggedIntUser = ((User)springSecurityService.getCurrentUser()).username.toString()
+            User user = User.findByUsername(currenLoggedIntUser);
+            annonce.setAuthor(user)
+
+            println(annonce.getDescription())
+            println(annonce.getPrice())
+            println(annonce.getActive())
+            println(annonce.getTitle())
+            println(annonce.getAuthor())
             annonceService.save(annonce)
         } catch (ValidationException e) {
             respond annonce.errors, view:'create'
@@ -53,6 +61,7 @@ class AnnonceController {
     def edit(Long id) {
         respond annonceService.get(id)
     }
+
 
     def update(Annonce annonce) {
         if (annonce == null) {

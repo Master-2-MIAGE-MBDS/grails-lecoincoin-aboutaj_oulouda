@@ -12,7 +12,7 @@ class IllustrationController {
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index(Integer max) {
-        params.max = Math.min(max ?: 14, 100)
+        params.max = Math.min(max ?: 12, 100)
         respond illustrationService.list(params), model:[illustrationCount: illustrationService.count()]
     }
 
@@ -20,23 +20,13 @@ class IllustrationController {
         respond illustrationService.get(id)
     }
 
+    def upload() {
+        def f = request.getFile('filecsv')
+        File fileDest = new File('C:\\Users\\DELL XPS\\Desktop\\lecoincoin')
+        f.transferTo(fileDest)
+    }
+
     def create() {
-
-        def file= request.getPart('imageUpload')
-        String imageUploadPath=grailsApplication.config.imageUpload.path
-        try{
-            if(file && !file.empty){
-                file.transferTo(new File("${imageUploadPath}/${file.name}"))
-                flash.message="your.sucessful.file.upload.message"
-            }
-            else{
-                flash.message="your.unsucessful.file.upload.message"
-            }
-        }
-        catch(Exception e){
-            log.error("Your exception message goes here",e)
-        }
-
         respond new Illustration(params)
     }
 
